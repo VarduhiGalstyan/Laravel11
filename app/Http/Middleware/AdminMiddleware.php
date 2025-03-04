@@ -21,5 +21,6 @@ class AdminMiddleware
             return $next($request);
         }
 
-        abort(403, 'Access denied');    }
+        return redirect('/home');
+      }
 }

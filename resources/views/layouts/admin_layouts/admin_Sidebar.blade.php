@@ -10,7 +10,7 @@
 
 			<li class="sidebar-item">
 				<a class="sidebar-link" href="ui-typography.html">
-                    <i class="align-middle" data-feather="align-left"></i> <span class="align-middle">Typography</span>
+                    <i class="align-middle" data-feather="align-left"></i> <span class="align-middle">Products</span>
                 </a>
 			</li>
 		</ul>
