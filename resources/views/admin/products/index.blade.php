@@ -3,7 +3,8 @@
 @section('content')
 <h1>Products</h1>
 <a href="{{ route('products.create') }}" class="btn btn-primary">Add Product</a>
-<table class="table">
+
+<table class="table" >
     <thead>
         <tr>
             <th>ID</th>
@@ -29,6 +30,7 @@
                 <td>{{ $product->description }}</td>
                 <td>{{ $product->date_of_birth }}</td>
                 <td>
+                    <a href="{{ route('products.edit', $product) }}" class="btn btn-warning">Edit</a>
                     <form action="{{ route('products.destroy', $product) }}" method="POST">
                         @csrf
                         @method('DELETE')
