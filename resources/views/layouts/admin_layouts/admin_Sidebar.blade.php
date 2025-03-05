@@ -9,7 +9,7 @@
 			</li>
 
 			<li class="sidebar-item">
-				<a class="sidebar-link" href="ui-typography.html">
+				<a class="sidebar-link" href="{{ route('products.index') }}">
                     <i class="align-middle" data-feather="align-left"></i> <span class="align-middle">Products</span>
                 </a>
 			</li>

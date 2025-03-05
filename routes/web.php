@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProductController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,4 +34,10 @@ Route::middleware([AdminMiddleware::class])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::post('/admin/profile/update', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::middleware(['admin'])->group(function () { 
+        Route::resource('products', ProductController::class);
+    });
 });
