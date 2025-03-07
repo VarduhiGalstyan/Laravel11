@@ -39,5 +39,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::middleware(['admin'])->group(function () { 
         Route::resource('products', ProductController::class);
+        Route::delete('/products/image-delete/{id}', [ProductController::class, 'deleteImage'])->name('products.image.delete');
+
     });
 });

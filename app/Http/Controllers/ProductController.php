@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProductController extends Controller
 {
@@ -49,10 +51,33 @@ class ProductController extends Controller
                 ]);
             }
         }
+        // if ($request->hasFile('image')) {
+        //     $file = $request->file('image');
+        //     $extension = $file->getClientOriginalExtension();
+        //     $filename = time() . '.' . $extension;
+        //     $file->move(public_path('uploads/blogs'), $filename);
+        // }
 
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
 
     }
+
+
+    public function deleteImage($id)
+    {
+        $image = ProductImage::findOrFail($id);
+
+        // Ջնջում ենք նկարը storage-ից
+        if (Storage::exists('public/' . $image->image_path)) {
+            Storage::delete('public/' . $image->image_path);
+        }
+
+        // Ջնջում ենք database-ից
+        $image->delete();
+
+        return response()->json(['success' => true]);
+    }
+
 
 
     /**

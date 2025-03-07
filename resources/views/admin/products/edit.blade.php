@@ -29,6 +29,19 @@
     </div>
 
     <div class="form-group">
+        <label>Existing Images</label>
+        <div class="image-container">
+            @foreach ($product->images as $image)
+                <div class="image-box" data-image-id="{{ $image->id }}">
+                    <img src="{{ asset('storage/' . $image->image_path) }}" width="100">
+                    <button type="button" class="delete-image-btn">❌</button>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+
+    <div class="form-group">
         <label for="images">Images</label>
         <input type="file" class="form-control" name="images[]" id="images" multiple>
     </div>
@@ -38,5 +51,29 @@
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script>
     CKEDITOR.replace('ckeditor');
+
+    document.querySelectorAll('.delete-image-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            let imageBox = this.parentElement;
+            let imageId = imageBox.getAttribute('data-image-id');
+
+            fetch(`/products/image-delete/${imageId}`, {
+                method: "DELETE",
+                headers: {
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    imageBox.remove(); // Ջնջում ենք HTML-ից
+                } else {
+                    console.error("Error:", data.message);
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    });
 </script>
 @endsection
