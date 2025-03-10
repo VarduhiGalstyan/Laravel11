@@ -16,7 +16,6 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'admin' => AdminMiddleware::class, // Այստեղ գրանցում ենք որպես 'admin'
-            'cors' => HandleCors::class, //cors
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
