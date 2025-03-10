@@ -43,3 +43,9 @@ Route::middleware(['auth'])->group(function () {
 
     });
 });
+
+Route::get('/productsapi', [ApiProductController::class, 'index']);
+Route::post('/productsapi', [ApiProductController::class, 'store']);
+Route::get('/productsapi/{id}', [ApiProductController::class, 'show']);
+Route::put('/productsapi/{id}', [ApiProductController::class, 'update']);
+Route::delete('/productsapi/{id}', [ApiProductController::class, 'destroy']);
